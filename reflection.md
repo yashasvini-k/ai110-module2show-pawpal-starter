@@ -2,15 +2,24 @@
 
 ## 1. System Design
 
+- Set Up Their Pet Profile
+- Manage Care Tasks
+- Generate and View Today's Plan
+
+
 **a. Initial design**
 
 - Briefly describe your initial UML design.
 - What classes did you include, and what responsibilities did you assign to each?
 
+I designed four classes. Owner holds the user's constraints like available time and preferences. Pet stores the animal's profile including any special needs. Task is the core unit, which holds care activity details like duration, priority, and preferred time of day. Scheduler is the orchestrator: it takes the owner, pet, and task list and produces a filtered, prioritized daily plan.
+
 **b. Design changes**
 
 - Did your design change during implementation?
 - If yes, describe at least one change and why you made it.
+
+Added priority validation based on design review to prevent out-of-range values breaking the scheduler's sort logic.
 
 ---
 
