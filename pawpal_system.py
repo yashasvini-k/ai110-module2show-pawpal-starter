@@ -39,6 +39,11 @@ class Task:
     is_recurring: bool = False
     completed: bool = False
 
+    def __post_init__(self):
+        """Validates that priority is between 1 and 5."""
+        if not (1 <= self.priority <= 5):
+            raise ValueError(f"Priority must be between 1 and 5, got {self.priority}")
+
     def mark_complete(self) -> None:
         """Marks the task as completed."""
         self.completed = True
