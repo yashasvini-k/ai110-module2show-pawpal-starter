@@ -41,3 +41,36 @@ pip install -r requirements.txt
 5. Add tests to verify key behaviors.
 6. Connect your logic to the Streamlit UI in `app.py`.
 7. Refine UML so it matches what you actually built.
+
+
+### Testing PawPal+
+
+
+Run the full test suite with:
+
+```bash
+python3 -m pytest tests/ -v
+```
+
+### What the tests cover
+
+| Area | What is verified |
+|---|---|
+| **Task** | Completion status, priority validation, schedulability checks |
+| **Pet** | Empty task list on creation, task count after adding, profile output |
+| **Owner** | No pets → empty task list, task aggregation across multiple pets |
+| **Scheduler (core)** | Time budget respected, high priority wins when time is tight, reset works |
+| **Sorting** | Tasks returned in HH:MM order, untimed tasks placed last |
+| **Filtering** | Filter by pet name, filter by completion status, unknown pet returns empty |
+| **Recurring tasks** | Next occurrence created on completion, correct due date (+1 day / +7 days) |
+| **Conflict detection** | Same start_time flagged, different times pass, no-time tasks never conflict |
+
+### Confidence level
+
+⭐⭐⭐⭐ (4/5)
+
+The core scheduling logic, recurring tasks, sorting, filtering, and conflict detection
+are all well covered. The main gap is overlap detection — two tasks at 08:00 and 08:15
+where the first runs 30 minutes would not be flagged. This is a known tradeoff
+(documented in reflection.md) that would require time-range comparison logic to address.
+
