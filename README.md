@@ -12,6 +12,13 @@ A busy pet owner needs help staying consistent with pet care. They want an assis
 
 Your job is to design the system first (UML), then implement the logic in Python, then connect it to the Streamlit UI.
 
+# 📸 Demo
+
+<a href="/course_images/ai110/pawpal_app.png" target="_blank">
+  <img src='/course_images/ai110/pawpal_app.png' title='PawPal App'
+       width='' alt='PawPal App' class='center-block' />
+</a>
+
 ## What you will build
 
 Your final app should:
@@ -21,16 +28,6 @@ Your final app should:
 - Generate a daily schedule/plan based on constraints and priorities
 - Display the plan clearly (and ideally explain the reasoning)
 - Include tests for the most important scheduling behaviors
-
-## Getting started
-
-### Setup
-
-```bash
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-```
 
 ### Suggested workflow
 
@@ -42,6 +39,62 @@ pip install -r requirements.txt
 6. Connect your logic to the Streamlit UI in `app.py`.
 7. Refine UML so it matches what you actually built.
 
+## Features
+
+### Core
+- Enter owner info (name, daily time budget, time-of-day preference)
+- Add multiple pets with species, age, and optional special needs
+- Add care tasks per pet with duration, priority, preferred time, and optional start time
+
+### Smarter Scheduling
+- **Priority-based scheduling** — tasks ranked 1–5; highest priority tasks are scheduled first when time is limited
+- **Sorting by time** — the daily plan displays in chronological HH:MM order; tasks without a start time appear last
+- **Filtering** — view the plan filtered by pet name or completion status
+- **Recurring tasks** — mark a daily or weekly task complete and a new instance is automatically created for the next occurrence using `timedelta`
+- **Conflict detection** — warns you if two tasks share the same start time so clashes are visible before the day begins
+- **Unscheduled task list** — tasks that don't fit within your time budget are surfaced separately so nothing is silently dropped
+
+
+## Project Structure
+
+```
+pawpal_system.py     # All backend logic (Owner, Pet, Task, Scheduler)
+app.py               # Streamlit UI
+main.py              # CLI demo script
+tests/
+  test_pawpal.py     # Automated test suite (24 tests)
+docs/
+  uml_diagram.md     # Final Mermaid.js class diagram
+reflection.md        # Design decisions and AI collaboration notes
+```
+
+---
+
+## Setup
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+---
+
+## Running the App
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## CLI Demo
+
+```bash
+python main.py
+```
+
+---
 
 ### Testing PawPal+
 
